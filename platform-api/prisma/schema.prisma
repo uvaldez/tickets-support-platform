@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Ticket {
+  id          Int @id @default(autoincrement())
+  subject     String?    @db.VarChar(255)
+  description String?    @db.Text
+  status      TicketStatus @default(OPEN)
+  priority    TicketPriority @default(MEDIUM)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  messages    Message[]  // Related messages (emails)
+  assignedTo  User?      @relation("AssignedTickets", fields: [assignedToId], references: [id])
+  assignedToId Int?
+  createdBy   User       @relation("CreatedTickets", fields: [createdById], references: [id])
+  createdById Int
+  threadId    String?    @db.VarChar(255) // New field to handle threading
+}
+
+model Message {
+  id          Int @id @default(autoincrement())
+  subject     String?
+  email       Email? @relation(fields: [emailId], references: [emailId])
+  emailId     String
+  body        String
+  createdAt   DateTime   @default(now())
+  ticket      Ticket?    @relation(fields: [ticketId], references: [id])
+  ticketId    Int?
+  threadId    String?    @db.VarChar(255) // Represents the thread
+}
+
+model Email {
+  id       Int      @id @default(autoincrement())
+  name     String?  @db.VarChar(255)
+  to       String?  @db.VarChar(255)
+  email    String   @db.VarChar(255)
+  emailId  String   @db.VarChar(255) @unique
+  message Message[]
+}
+
+model User {
+  id        Int @id @default(autoincrement())
+  name      String?    @db.VarChar(255)
+  email     String     @db.VarChar(255)
+  tickets   Ticket[]   @relation("CreatedTickets")
+  assignedTickets Ticket[] @relation("AssignedTickets")
+}
+
+enum TicketStatus {
+  OPEN
+  PENDING
+  CLOSED
+}
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
