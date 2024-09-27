@@ -9,6 +9,7 @@ This is a ticket support platform similar to Zendesk. Users will send emails to 
 3. From root folder run `docker compose up -d`
 4. Run temporal worker: cd to temporal and run `npm start`
 5. Run the temporal workflow: cd to temporal and run `npm run schedule.start`
+6. You may need to run the seeds script `npx ts-node prisma/seed.ts`
 
 ## Testing the Application
 1. Open your browser and navigate to http://localhost:5173/
@@ -17,6 +18,7 @@ This is a ticket support platform similar to Zendesk. Users will send emails to 
 4. Wait for temporal workflow to process the email.
 5. Refresh the tickets page and you should see the new ticket.
 6. Click on View Details and you can reply, update status, priority and assignee.
+7. If you want to check the temporal workflow you can navigate to http://localhost:8233/
 
 ## API Documentation
 You can take a look at the api documentation in the swagger ui: http://localhost:3000/api
@@ -32,3 +34,4 @@ You can take a look at the api documentation in the swagger ui: http://localhost
 3. Add user roles: We can add a user roles layer to the platform api to allow the admin user to have more privileges.
 4. Improve api security: I only added a simple api key check for now, but we can add a more complex security layer to the api (rate limiting, authentication, authorization, etc.).
 5. Add some abstraction to the ORM: there is currently no abstraction for the ORM in tickets service, the ticket service should not be aware of prisma, it should implement any ORM and it should be easy to change.
+6. The AI feature I would add is automatic replies based on past data and common troubleshooting criterias or lack of information from customer.
