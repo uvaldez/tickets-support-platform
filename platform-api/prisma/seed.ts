@@ -18,7 +18,6 @@ const users = [
 ];
 
 async function main() {
-  // Create 3 random users
   for (const user of users) {
     await prisma.user.create({
       data: user,

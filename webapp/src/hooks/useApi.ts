@@ -1,7 +1,6 @@
 import { useQuery, useMutation, UseQueryOptions, UseMutationOptions, useQueryClient } from '@tanstack/react-query';
 import apiClient from '../api/apiClient';
 
-// Tickets
 export const useGetTickets = (status?: TicketStatus, options?: UseQueryOptions<TicketDto[], unknown, TicketDto[], string[]>) => {
   return useQuery({
     queryKey: ['tickets', status ?? 'all'],
@@ -54,7 +53,6 @@ export const useReplyToEmail = (options?: UseMutationOptions<ReplyToEmailDto, un
   });
 };
 
-// Types based on the Swagger schemas
 export interface EmailDto {
   name?: string;
   to?: string;
@@ -97,7 +95,6 @@ export interface ReplyToEmailDto {
   messageId: string;
 }
 
-// Add this new hook
 export const useGetUsers = (options?: UseQueryOptions<UserDto[], unknown, UserDto[], string[]>) => {
   return useQuery({
     queryKey: ['users'],

@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { TicketStatus, TicketPriority } from './ticket.model'; // Adjust the import path as needed
+import { TicketStatus, TicketPriority } from './ticket.model';
 import { EMAIL_SERVICE, EmailService } from '../email/email.service.interface';
 import { PrismaService } from '../../prisma/prisma.service';
-import { Ticket } from './ticket.model'; // Import the Ticket class if needed
+import { Ticket } from './ticket.model';
 import { Email, Prisma } from '@prisma/client';
 import { CreateTicketDto } from './dto/ticket.dto';
 
@@ -13,7 +13,7 @@ const DEFAULT_ASSIGNED_TO_ID = parseInt(process.env.DEFAULT_ASSIGNED_TO_ID || '1
 export class TicketsService {
     constructor(
         @Inject(EMAIL_SERVICE) private readonly emailService: EmailService,
-        private readonly prisma: PrismaService, // Inject Prisma service
+        private readonly prisma: PrismaService, // Inject Prisma service, an abstraction to this would be better
     ) {}
 
     async findTicketById(id: string) {

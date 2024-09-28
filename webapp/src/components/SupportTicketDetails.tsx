@@ -21,7 +21,6 @@ interface SupportTicketDetailsProps {
   ticket: TicketDto;
 }
 
-// Add this function at the top of your file, outside of the component
 const removeHtmlTags = (str: string) => {
   if ((str===null) || (str===''))
     return '';
@@ -85,7 +84,7 @@ const SupportTicketDetails: React.FC<SupportTicketDetailsProps> = ({ ticket }) =
       {
         onSuccess: () => {
           setSnackbar({ open: true, message: 'Reply sent successfully', severity: 'success' });
-          setReply(''); // Clear the reply field after successful send
+          setReply('');
         },
         onError: () => {
           setSnackbar({ open: true, message: 'Failed to send reply', severity: 'error' });

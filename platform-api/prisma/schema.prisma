@@ -22,12 +22,12 @@ model Ticket {
   priority    TicketPriority @default(MEDIUM)
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
-  messages    Message[]  // Related messages (emails)
+  messages    Message[]
   assignedTo  User?      @relation("AssignedTickets", fields: [assignedToId], references: [id])
   assignedToId Int?
   createdBy   User       @relation("CreatedTickets", fields: [createdById], references: [id])
   createdById Int
-  threadId    String?    @db.VarChar(255) // New field to handle threading
+  threadId    String?    @db.VarChar(255)
 }
 
 model Message {
@@ -39,7 +39,7 @@ model Message {
   createdAt   DateTime   @default(now())
   ticket      Ticket?    @relation(fields: [ticketId], references: [id])
   ticketId    Int?
-  threadId    String?    @db.VarChar(255) // Represents the thread
+  threadId    String?    @db.VarChar(255)
 }
 
 model Email {

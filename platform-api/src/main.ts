@@ -17,7 +17,7 @@ async function bootstrap() {
     .setVersion('1.0')
     .addApiKey(
       { type: 'apiKey', name: 'x-api-key', in: 'header' },
-      'x-api-key', // This is the name of the security scheme
+      'x-api-key',
     )
     .build();
   const document = SwaggerModule.createDocument(app, config);
