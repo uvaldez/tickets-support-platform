@@ -33,5 +33,5 @@ You can take a look at the api documentation in the swagger ui: http://localhost
 2. Add real time updates: We can add a real time updates layer to the platform api to update the frontend with the new tickets and users.
 3. Add user roles: We can add a user roles layer to the platform api to allow the admin user to have more privileges.
 4. Improve api security: I only added a simple api key check for now, but we can add a more complex security layer to the api (rate limiting, authentication, authorization, etc.).
-5. Add some abstraction to the ORM: there is currently no abstraction for the ORM in tickets service, the ticket service should not be aware of prisma, it should implement any ORM and it should be easy to change.
+5. Add some abstraction to the ORM: there is currently no abstraction for the ORM in tickets service, the ticket service receiving prisma as depenency injection but there are some methods that should be more generic, example `findUnique`.
 6. The AI feature I would add is automatic replies based on past data and common troubleshooting criterias or lack of information from customer.
