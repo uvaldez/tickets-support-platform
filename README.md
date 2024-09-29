@@ -6,10 +6,11 @@ This is a ticket support platform similar to Zendesk. Users will send emails to 
 ## Getting Started
 1. Clone the repository
 2. You will to run `yarn install` in temporal, platform-api and webapp folder.
-3. From root folder run `docker compose up -d`
-4. Run temporal worker: cd to temporal and run `npm start`
-5. Run the temporal workflow: cd to temporal and run `npm run schedule.start`
-6. You may need to run the seeds script `npx ts-node prisma/seed.ts`
+3. From root Folder run `docker compose build`
+4. From root folder run `docker compose up -d`
+5. Run temporal worker: cd to temporal and run `npm start`
+6. Run the temporal workflow: cd to temporal and run `npm run schedule.start`
+7. You may need to run the seeds script `npx ts-node prisma/seed.ts`
 
 ## Testing the Application
 1. Open your browser and navigate to http://localhost:5173/
